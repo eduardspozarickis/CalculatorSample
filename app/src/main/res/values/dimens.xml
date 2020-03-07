@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toggle_size">48dp</dimen>
+
+    <dimen name="main_margin">10dp</dimen>
+    <dimen name="side_margin">@dimen/main_margin</dimen>
+</resources>

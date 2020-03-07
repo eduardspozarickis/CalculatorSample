@@ -1,0 +1,89 @@
+Sākts 10:30 7.03.20
+Pārtraukums 13:00 - 2,5h
+Turpināts 14:30
+Pabeigts 16:00
+
+Plāns:
+1. Uzdevuma analīze
+2. Plānošana:
+	2.1. Funkcionalitāte
+	2.2. UI
+	2.3. Unit testi
+	2.4. Instrumental testi
+3. Kodēšana
+	3.1. Unit testi
+	3.2. UI
+	3.3. Funkcionalitāte
+4. Testēšana
+
+
+1. Uzdevuma analīze
+Uzdevums: Ir jāuztaisa modulārs kalkulators: kalkulators, kuram, neveicot rebuild darbības, varētu pievienot papildus funkcionalitāti.
+* sataisīt parasto kalkulatoru ar standartam darbībām: +, -, *, /, dzēšana.
+* sataisīt iespēju kalkulatora apmācībai ar jauno funkcionalitāti:
+	- var iedot iespēju lietotajam ievadīt jaunas funkcionalitātes nosaukumu un formulu caur dialog'u
+* sataisīt jaunas funkcionalitātes saglabāšanu:
+	- var saglabāt lietotāja formulas aplikācijā caur Room datubāzi (SQLite)
+
+2. Plānošana
+* MVVM pattern
+* Viena Activity (CalcActivity)
+	- pamatskats ar kalkulatoru
+* Otra Activity (FormulaActivity)
+	- lietotāja formulu saraksts lai iesniegt kalkulatora skatā;
+	- jaunas formulas pievienošana
+
+2.1. Funkcionalitāte
+* CalcViewModel:
+	- veikt kalkulāciju no lietotāja izvēlētas darbības un atjaunot UI
+	- atvērt skatu ar formulām
+
+* FormulaViewModel
+	- sagatavot sarakstu priekš UI lai attēlot lietotāja formulas;
+	- veikt darbību ar izvēlēto formulu: rediģēt, dzēst
+	- atgriezt kalkulatora skatam izvēlēto formulu;
+	- atvērt jaunas formulas izveidošanas dialog'u;
+	- jaunas formulas pārbaudē: unikāls nosaukums, kalkulācijas iespējamība
+	- pieglabāt jaunizveidoto formulu datubāzē.
+
+2.2. UI
+* Kalkulatora skats:
+	- 10 pogas ar cipariem: 0-9
+	- komata, vienādības, dzēšanas (1 simbola un pilna), formulu pogas
+
+| func | <- | c |
+-----------------
+| 7 | 8 | 9 | / |
+-----------------
+| 4 | 5 | 6 | * |
+-----------------
+| 1 | 2 | 3 | - |
+-----------------
+| 0 | , | = | + |
+
+* Formulu saraksta skats
+	- saraksts ar formulām
+		- izsaukt darbību ar katru: rediģēt, dzēst
+	- FAB (FloatingActionButton) formulas veidošanai
+
+* Formulas veidošanas skats:
+	- formulas nosaukums
+	- mainīgu saraksts - nosaukums, pievienošana, dzēšana,
+	- formula - standarta kalkulatora darbības un simboli, mainīgo ievēšana
+
+2.3. Unit testi
+* CalcViewModel:
+	- standartu darbību veikšana
+
+2.4. Instrumental testi
+* Kalkulatora skats:
+	- UI attēlošana pēc standartu darbību veikšana
+	- FormulaActivity izsaukšana pēc attiecīgas pogas
+
+* Formulu saraksta skats:
+	- lietotāja formulu attēlošana;
+	- darbību ar formulu atvēršana;
+	- formulas veidošanas atvēršana / ar formulas datiem rediģēšanas gadījumā
+
+* Formulas dialog'a skats:
+	- kļūdas formulā attēlošana
